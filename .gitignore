@@ -1,0 +1,14 @@
+# Archivos y carpetas de NetBeans
+nbproject/private/
+build/
+dist/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de Java
+*.class
+
+# Otros
+*.log
