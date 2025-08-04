@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-    
+
     private List<Libro> libros = new ArrayList<>();
 
     // Agregar un libro
@@ -17,49 +17,52 @@ public class Biblioteca {
 
     // Listar todos los libros con sus datos en forma tabulada.
     public void listarLibros() {
-        if (libros.size() > 0) {
-            System.out.println("LISTADO DE LIBROS ");
-            MetodosAuxiliares.mostrarTituloDatosFormaTabulada();
-
-            for (Libro libro : libros) {
-                MetodosAuxiliares.mostrarDatosDeFormaTabulada(libro);
-            }
-        } else {
+        if (libros.isEmpty()) {
             MetodosAuxiliares.advertenciaListaVacia();
+            return;
+        }
+
+        System.out.println("LISTADO DE LIBROS ");
+        MetodosAuxiliares.mostrarTituloDatosFormaTabulada();
+
+        for (Libro libro : libros) {
+            MetodosAuxiliares.mostrarDatosDeFormaTabulada(libro);
         }
     }
 
     // Buscar libros por autor (o parte del nombre del autor).
     public void buscarLibrosPorAutor(String autor) {
-        if (libros.size() > 0) {
-            MetodosAuxiliares.mostrarTituloDatosFormaTabulada();
-
-            for (Libro libro : libros) {
-                String autorSinTilde, inputAutorSinTilde;
-                autorSinTilde = MetodosAuxiliares.quitarTildes(libro.getAutor());
-                inputAutorSinTilde = MetodosAuxiliares.quitarTildes(autor);
-                
-                if (autorSinTilde.toLowerCase().contains(inputAutorSinTilde.toLowerCase())) {
-                    MetodosAuxiliares.mostrarDatosDeFormaTabulada(libro);
-                }
-            }
-        } else {
+        if (libros.isEmpty()) {
             MetodosAuxiliares.advertenciaListaVacia();
+            return;
+        }
+
+        MetodosAuxiliares.mostrarTituloDatosFormaTabulada();
+
+        for (Libro libro : libros) {
+            String autorSinTilde, inputAutorSinTilde;
+            autorSinTilde = MetodosAuxiliares.quitarTildes(libro.getAutor());
+            inputAutorSinTilde = MetodosAuxiliares.quitarTildes(autor);
+
+            if (autorSinTilde.toLowerCase().contains(inputAutorSinTilde.toLowerCase())) {
+                MetodosAuxiliares.mostrarDatosDeFormaTabulada(libro);
+            }
         }
     }
 
     // Mostrar libros publicados antes de un año dado.
     public void librosPublicadosAntesDeUnAnioDado(int anioIngresado) {
-        if (libros.size() > 0) {
-            MetodosAuxiliares.mostrarTituloDatosFormaTabulada();
-
-            for (Libro libro : libros) {
-                if (libro.getAnioPublicacion() < anioIngresado) {
-                    MetodosAuxiliares.mostrarDatosDeFormaTabulada(libro);
-                }
-            }
-        } else {
+        if (libros.isEmpty()) {
             MetodosAuxiliares.advertenciaListaVacia();
+            return;
+        }
+
+        MetodosAuxiliares.mostrarTituloDatosFormaTabulada();
+
+        for (Libro libro : libros) {
+            if (libro.getAnioPublicacion() < anioIngresado) {
+                MetodosAuxiliares.mostrarDatosDeFormaTabulada(libro);
+            }
         }
     }
 
@@ -68,11 +71,11 @@ public class Biblioteca {
         MetodosAuxiliares.imprimirSeparador();
         System.out.println("CANTIDAD TOTAL DE EJEMPLARES EN LA BIBLIOTECA");
         int sumaEjemplares = 0;
-        
+
         for (Libro libro : libros) {
             sumaEjemplares += libro.getCantidadEjemplares();
         }
-        
+
         System.out.println(sumaEjemplares + " ejemplares en total.");
     }
 }
